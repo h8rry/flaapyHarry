@@ -14,9 +14,11 @@ $(document).ready(function(){
   var timer;
   var asteroids = [];
   var harryImage = new Image();
+  var asteroidImage = new Image();
   var score = 0;
   var highScore = 0;
   harryImage.src = "images/Harrynaut.png"
+  asteroidImage.src = "images/asteroid.png"
 
   function initHarry () {
     ctx.fillStyle = "white";
@@ -78,7 +80,7 @@ $(document).ready(function(){
         asteroids.splice(i,1);
         i--;
       } else {
-        ctx.fillRect(asteroids[i].position.x,asteroids[i].position.y,asteroids[i].size,asteroids[i].size);
+        ctx.drawImage(asteroidImage,asteroids[i].position.x,asteroids[i].position.y,asteroids[i].size,asteroids[i].size);
       };
     };
   };
@@ -96,7 +98,7 @@ $(document).ready(function(){
     }
   });
 
-  $(document).on("click","#canvas", function() {
+  $(document).on("click touchstart","#canvas", function() {
     harryVelocity.y = -3;
   });
 
@@ -104,7 +106,7 @@ $(document).ready(function(){
     increaseScore();
     if (asteroids.length === 0) {
       makeAsteroid();
-    } else if (asteroids.length < 6) {
+    } else if (asteroids.length < 7) {
       if (Math.random()<0.01) {
         makeAsteroid();
       }
